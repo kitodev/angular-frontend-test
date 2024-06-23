@@ -1,0 +1,16 @@
+<div class="comment">
+  <div class="comment__content">
+    <div>Name: {{ comment.author.name }}</div>
+    <div>Email: {{ comment.author.email }}</div>
+    <div>Role: {{ getRoleName(comment.author.role) }}</div>
+    <p class="my-4">{{ comment.body }}</p>
+  </div>
+  <div class="comment__actions">
+    @if ($currentUserPermissions()?.AddDeleteComments) {
+      <button mat-raised-button color="primary" (click)="reply()">Reply</button>
+    }
+    @if (comment.author.id === $currentUser()?.id || $currentUserPermissions()?.DeleteOthersCommentsTopics) {
+      <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+    }
+  </div>
+</div>

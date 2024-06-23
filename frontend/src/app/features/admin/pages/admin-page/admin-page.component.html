@@ -1,0 +1,24 @@
+<section class="admin">
+  <mat-form-field class="admin__role-selector hide-form-field-subscript">
+    <mat-label>Roles</mat-label>
+    <mat-select [value]="currentRole" (selectionChange)="changeRole($event)">
+      @for (role of roles; track $index) {
+        <mat-option [value]="role.value">{{ role.key }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="mb-4">
+    <button mat-raised-button color="primary" (click)="editRoleName()">Edit role name</button>
+  </div>
+
+  <div class="admin__role-permissions">
+    @for (permission of permissions; track $index) {
+      <mat-checkbox
+        [checked]="permissionService.hasPermission(roles[currentRole].value, permission.value)"
+        (change)="updatePermission($event, roles[currentRole].value, permission.value)"
+        >{{ permission.key }}</mat-checkbox
+      >
+    }
+  </div>
+</section>

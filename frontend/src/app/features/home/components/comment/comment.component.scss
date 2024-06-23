@@ -1,0 +1,7 @@
+.comment {
+  @apply flex flex-col gap-4 bg-slate-100 p-4;
+
+  &__actions {
+    @apply flex gap-4;
+  }
+}

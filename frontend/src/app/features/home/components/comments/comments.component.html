@@ -1,0 +1,23 @@
+@for (comment of filteredComments; track $index) {
+  <div class="comments">
+    <app-comment [topic]="topic" [comment]="comment"></app-comment>
+    @if (comment.comments.length) {
+      <app-comments [topic]="topic" [comments]="comment.comments" [nestedLevel]="nestedLevel + 1"></app-comments>
+    }
+  </div>
+  @if ($last) {
+    <ng-container *ngTemplateOutlet="addCommentButton; context: { commentId: comment.id }"></ng-container>
+  }
+} @empty {
+  @if (nestedLevel === 0) {
+    <ng-container *ngTemplateOutlet="addCommentButton"></ng-container>
+  }
+}
+
+<ng-template #addCommentButton let-commentId="commentId">
+  @if ($currentUserPermissions()?.AddDeleteComments) {
+    <button class="comments__button" mat-raised-button color="primary" (click)="addComment(commentId)">
+      Add comment
+    </button>
+  }
+</ng-template>

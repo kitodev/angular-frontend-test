@@ -1,0 +1,73 @@
+module.exports = {
+  root: true,
+  ignorePatterns: ['projects/**/*'],
+  overrides: [
+    {
+      files: ['*.ts'],
+      extends: [
+        'airbnb-base',
+        'airbnb-typescript/base',
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended-type-checked',
+        'plugin:@typescript-eslint/stylistic-type-checked',
+        'plugin:@angular-eslint/recommended',
+        'plugin:@angular-eslint/template/process-inline-templates',
+      ],
+      parserOptions: {
+        sourceType: 'module',
+        tsconfigRootDir: __dirname,
+        project: './tsconfig.json',
+      },
+      rules: {
+        '@typescript-eslint/comma-dangle': 'off',
+        '@typescript-eslint/consistent-type-definitions': 'off',
+        '@typescript-eslint/indent': 'off',
+        '@typescript-eslint/lines-between-class-members': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-namespace': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/unbound-method': 'off',
+        'class-methods-use-this': 'off',
+        'function-paren-newline': 'off',
+        'implicit-arrow-linebreak': 'off',
+        'import/prefer-default-export': 'off',
+        'linebreak-style': 'off',
+        'max-classes-per-file': 'off',
+        'no-bitwise': 'off',
+        'no-console': 'off',
+        'no-restricted-syntax': 'off',
+        'no-underscore-dangle': 'off',
+        'object-curly-newline': 'off',
+        'operator-linebreak': 'off',
+        'max-len': 'off',
+
+        '@angular-eslint/directive-selector': [
+          'error',
+          {
+            type: 'attribute',
+            prefix: 'app',
+            style: 'camelCase',
+          },
+        ],
+        '@angular-eslint/component-selector': [
+          'error',
+          {
+            type: 'element',
+            prefix: 'app',
+            style: 'kebab-case',
+          },
+        ],
+      },
+    },
+    {
+      files: ['*.html'],
+      extends: ['plugin:@angular-eslint/template/recommended', 'plugin:@angular-eslint/template/accessibility'],
+      rules: {},
+    },
+  ],
+};

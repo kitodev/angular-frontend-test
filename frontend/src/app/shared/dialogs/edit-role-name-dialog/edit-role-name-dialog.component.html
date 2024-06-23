@@ -1,0 +1,13 @@
+<div class="edit-role-name-dialog">
+  <form [formGroup]="editRoleNameForm">
+    <h2>Edit role name</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <input matInput [formControl]="editRoleNameForm.controls.name" />
+      @if (editRoleNameForm.controls.name.hasError('required')) {
+        <mat-error>This field is required!</mat-error>
+      }
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="editRoleNameForm.invalid" (click)="submit()">Edit</button>
+  </form>
+</div>

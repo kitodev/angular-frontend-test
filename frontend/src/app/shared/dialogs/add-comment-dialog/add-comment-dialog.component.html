@@ -1,0 +1,15 @@
+<div class="add-comment-dialog">
+  <form [formGroup]="addCommentForm">
+    <h2>Add Comment</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Comment</mat-label>
+      <textarea matInput rows="5" [formControl]="addCommentForm.controls.body"></textarea>
+      @if (addCommentForm.controls.body.hasError('required')) {
+        <mat-error>This field is required!</mat-error>
+      }
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="addCommentForm.invalid" (click)="submit()">
+      Add comment
+    </button>
+  </form>
+</div>

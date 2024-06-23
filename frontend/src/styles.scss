@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply flex min-h-dvh flex-col overflow-x-hidden overflow-y-scroll font-roboto;
+  }
+
+  * {
+    &::-webkit-scrollbar {
+      @apply h-2 w-2;
+    }
+
+    ::-webkit-scrollbar-track {
+      @apply bg-gray-100;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      @apply bg-gray-400;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-gray-500;
+    }
+  }
+}
+
+.hide-form-field-subscript {
+  .mat-mdc-form-field-subscript-wrapper {
+    @apply hidden;
+  }
+}

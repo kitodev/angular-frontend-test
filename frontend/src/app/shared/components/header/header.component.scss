@@ -1,0 +1,13 @@
+mat-toolbar {
+  @apply relative flex justify-between;
+
+  .menu {
+    @apply absolute left-[50%] top-[50%] flex gap-4;
+
+    transform: translate(-50%, -50%);
+
+    .active {
+      @apply border-b;
+    }
+  }
+}

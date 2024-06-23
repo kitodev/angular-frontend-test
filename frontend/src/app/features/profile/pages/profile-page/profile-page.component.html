@@ -1,0 +1,84 @@
+<section class="profile">
+  <div class="profile__wrapper">
+    <div class="profile__details">
+      <div class="profile__permissions">
+        <h4 class="profile__permission-title">Permissions</h4>
+        <div class="profile__current-permissions">
+          @for (currentUserPermission of $currentUserPermissions(); track $index) {
+            <div
+              [ngClass]="{
+                authorized: currentUserPermission[1],
+                unauthorized: !currentUserPermission[1],
+              }"
+            >
+              {{ currentUserPermission[0] }}
+            </div>
+          }
+        </div>
+      </div>
+      <div class="profile__counters">
+        <div>Topics by user: {{ $currentUserTopicsCount() }}</div>
+        <div>Comments by user: {{ $currentUserCommentsCount() }}</div>
+      </div>
+    </div>
+
+    <form class="profile__edit-profile-form" [formGroup]="editProfileForm">
+      <h2>Edit profile</h2>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [formControl]="editProfileForm.controls.name" />
+        @if (editProfileForm.controls.name.hasError('required')) {
+          <mat-error>This field is required!</mat-error>
+        } @else if (editProfileForm.controls.name.hasError('minlength')) {
+          <mat-error>Must be at least 5 characters long!</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput [formControl]="editProfileForm.controls.email" />
+        @if (editProfileForm.controls.email.hasError('required')) {
+          <mat-error>This field is required!</mat-error>
+        } @else if (editProfileForm.controls.email.hasError('email')) {
+          <mat-error>Must be a valid e-mail address!</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [formControl]="editProfileForm.controls.password"
+          [type]="isPasswordHidden ? 'password' : 'text'"
+        />
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility('password')">
+          <mat-icon>{{ isPasswordHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (editProfileForm.controls.password.hasError('PASSWORD_MIN_LENGTH')) {
+          <mat-error>Must be at least 8 characters long!</mat-error>
+        } @else if (editProfileForm.controls.password.hasError('PASSWORD_HAS_UPPERCASE')) {
+          <mat-error>Must contain at least one uppercase letter!</mat-error>
+        } @else if (editProfileForm.controls.password.hasError('PASSWORD_HAS_LOWERCASE')) {
+          <mat-error>Must contain at least one lowercase letter!</mat-error>
+        } @else if (editProfileForm.controls.password.hasError('PASSWORD_HAS_NUMBER')) {
+          <mat-error>The password must contain at least one digit!</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          [formControl]="editProfileForm.controls.confirmPassword"
+          [type]="isConfirmPasswordHidden ? 'password' : 'text'"
+        />
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility('confirm-password')">
+          <mat-icon>{{ isConfirmPasswordHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (editProfileForm.controls.confirmPassword.hasError('PASSWORD_MISMATCH')) {
+          <mat-error>Passwords don't match!</mat-error>
+        }
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="editProfileForm.invalid" (click)="editProfile()">
+        Submit
+      </button>
+    </form>
+  </div>
+</section>

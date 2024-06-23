@@ -1,0 +1,19 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-attributes"],
+  "attributeGroups": [
+    "^(id|name)$",
+    "^class$",
+    "$DEFAULT",
+    "$ANGULAR_STRUCTURAL_DIRECTIVE",
+    "$ANGULAR_TWO_WAY_BINDING",
+    "$ANGULAR_INPUT",
+    "$ANGULAR_OUTPUT",
+    "^data-",
+    "^aria-"
+  ],
+  "printWidth": 120,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true
+}

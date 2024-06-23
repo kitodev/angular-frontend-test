@@ -1,0 +1,11 @@
+:host {
+  @apply flex flex-col gap-4;
+}
+
+.comments {
+  @apply flex flex-col gap-4 border p-4;
+
+  &__button {
+    @apply w-fit;
+  }
+}

@@ -1,0 +1,49 @@
+<section class="home">
+  <mat-accordion displayMode="flat">
+    @for (topic of $topics(); track $index) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ topic.title }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>Name: {{ topic.author.name }}</div>
+        <div>E-mail: {{ topic.author.email }}</div>
+        <div>Role: {{ getRoleName(topic.author.role) }}</div>
+        <p class="my-5">{{ topic.body }}</p>
+        @if ($currentUserPermissions()?.ReadComments) {
+          <app-comments [topic]="topic" [comments]="topic.comments"></app-comments>
+        } @else {
+          <div class="bg-slate-100 p-4">You don't have permission to read comments!</div>
+        }
+        @if (
+          (topic.author.id === $currentUser()?.id && $currentUserPermissions()?.AddDeleteTopics) ||
+          $currentUserPermissions()?.DeleteOthersCommentsTopics
+        ) {
+          <button class="mt-4" mat-raised-button color="warn" (click)="deleteTopic(topic.id)">Delete topic</button>
+        }
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+
+  @if ($currentUserPermissions()?.AddDeleteTopics) {
+    <form class="home__add-topic-form" [formGroup]="addTopicForm">
+      <h2>Add topic</h2>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput [formControl]="addTopicForm.controls.title" />
+        @if (addTopicForm.controls.title.hasError('required')) {
+          <mat-error>This field is required!</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput [formControl]="addTopicForm.controls.body" />
+        @if (addTopicForm.controls.body.hasError('required')) {
+          <mat-error>This field is required!</mat-error>
+        }
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="addTopicForm.invalid" (click)="addTopic()">
+        Add topic
+      </button>
+    </form>
+  }
+</section>

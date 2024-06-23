@@ -1,0 +1,20 @@
+<header>
+  <mat-toolbar color="primary">
+    <h1>{{ $title() }}</h1>
+    <div class="menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    </div>
+    <mat-form-field class="hide-form-field-subscript">
+      <mat-label>Current user</mat-label>
+      @if ($users(); as users) {
+        <mat-select [value]="$currentUser()" [compareWith]="compareEntitiesById" (selectionChange)="changeUser($event)">
+          @for (user of users; track $index) {
+            <mat-option [value]="user">{{ user.name }}</mat-option>
+          }
+        </mat-select>
+      }
+    </mat-form-field>
+  </mat-toolbar>
+</header>

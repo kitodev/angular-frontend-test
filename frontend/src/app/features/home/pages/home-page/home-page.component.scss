@@ -1,0 +1,23 @@
+:host {
+  @apply flex flex-grow;
+}
+
+.home {
+  @apply flex flex-grow flex-col justify-between gap-4;
+
+  mat-accordion {
+    @apply bg-blue-200 p-4;
+  }
+
+  &__add-topic-form {
+    @apply mx-auto flex w-full max-w-[400px] flex-col gap-4 bg-blue-200 p-4;
+
+    mat-form-field {
+      @apply w-full;
+    }
+
+    button {
+      @apply self-end;
+    }
+  }
+}
